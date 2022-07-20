@@ -7,6 +7,15 @@
 > -- <cite>https://www.jooq.org/</cite>
 
 
+## Description
+
+I've done straight JDBC and Hibernate. I'd like to learn jOOQ. In fact, I'd like to learn the full range of effective
+tools for interacting with a SQL database from a Java program. Depending on the use-case, one tool can be a more appropriate
+than another. I'd like to learn the JPA/Hibernate Criteria API better too. 
+
+**NOTE**: This project was developed on macOS. It is for my own personal use.
+
+
 ## Standalone sub-projects
 
 This repository illustrates different concepts, patterns and examples via standalone sub-projects. Each sub-project is
@@ -22,6 +31,13 @@ A basic demo of jOOQ complete with Gradle-based codegen.
 
 See the README in [basic/](basic/).
 
+### `joins/`
+
+NOT YET IMPLEMENTED
+
+An illustration of table joins in jOOQ.
+
+See the README in [joins/](joins/).
 
 ## WishList
 
@@ -33,6 +49,6 @@ General clean-ups, TODOs and things I wish to implement for this project:
       to copy the jOOQ jars and the JDBC driver jar, but that's not trivial for a Gradle project. The idiomatic thing to
       do for a Gradle project is to create a Gradle plugin that depends on those artifacts (and thus, not code directly
       to jar files).
-* [ ] Make an intermediate project. I want multiple tables, I want to join across the tables, I want the query to be
+* [ ] IN PROGRESS Make an intermediate project. I want multiple tables, I want to join across the tables, I want the query to be
       dynamically created in a way that allows different joins to happen based on user input, I want about 1,000,000
       records and I want indexes on the tables.  

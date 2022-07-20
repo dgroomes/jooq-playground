@@ -46,4 +46,4 @@ Follow these instructions to build and run the program:
 ## Reference
 
 * [`xerial/sqlite-jdbc`: JDBC driver for SQLite](https://github.com/xerial/sqlite-jdbc)
-* [jOOQ single-page docs](https://www.jooq.org/doc/3.18/manual-single-page/)
+* [jOOQ docs](https://www.jooq.org/doc/3.17/manual/)
