@@ -4,9 +4,12 @@
 package dgroomes.db;
 
 
+import dgroomes.db.tables.ObservationTypes;
 import dgroomes.db.tables.Observations;
+import dgroomes.db.tables.records.ObservationTypesRecord;
 import dgroomes.db.tables.records.ObservationsRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,5 +27,12 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ObservationTypesRecord> OBSERVATION_TYPES__PK_OBSERVATION_TYPES = Internal.createUniqueKey(ObservationTypes.OBSERVATION_TYPES, DSL.name("pk_observation_types"), new TableField[] { ObservationTypes.OBSERVATION_TYPES.ID }, true);
     public static final UniqueKey<ObservationsRecord> OBSERVATIONS__PK_OBSERVATIONS = Internal.createUniqueKey(Observations.OBSERVATIONS, DSL.name("pk_observations"), new TableField[] { Observations.OBSERVATIONS.ID }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<ObservationsRecord, ObservationTypesRecord> OBSERVATIONS__FK_OBSERVATIONS_PK_OBSERVATION_TYPES = Internal.createForeignKey(Observations.OBSERVATIONS, DSL.name("fk_observations_pk_observation_types"), new TableField[] { Observations.OBSERVATIONS.TYPE }, Keys.OBSERVATION_TYPES__PK_OBSERVATION_TYPES, new TableField[] { ObservationTypes.OBSERVATION_TYPES.ID }, true);
 }

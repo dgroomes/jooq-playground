@@ -4,6 +4,7 @@
 package dgroomes.db;
 
 
+import dgroomes.db.tables.ObservationTypes;
 import dgroomes.db.tables.Observations;
 
 
@@ -12,6 +13,11 @@ import dgroomes.db.tables.Observations;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>observation_types</code>.
+     */
+    public static final ObservationTypes OBSERVATION_TYPES = ObservationTypes.OBSERVATION_TYPES;
 
     /**
      * The table <code>observations</code>.

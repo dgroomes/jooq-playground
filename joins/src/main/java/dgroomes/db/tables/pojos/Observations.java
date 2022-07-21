@@ -17,20 +17,24 @@ public class Observations implements Serializable {
 
     private Integer id;
     private String observation;
+    private Integer type;
 
     public Observations() {}
 
     public Observations(Observations value) {
         this.id = value.id;
         this.observation = value.observation;
+        this.type = value.type;
     }
 
     public Observations(
         Integer id,
-        String observation
+        String observation,
+        Integer type
     ) {
         this.id = id;
         this.observation = observation;
+        this.type = type;
     }
 
     /**
@@ -61,6 +65,20 @@ public class Observations implements Serializable {
         this.observation = observation;
     }
 
+    /**
+     * Getter for <code>observations.type</code>.
+     */
+    public Integer getType() {
+        return this.type;
+    }
+
+    /**
+     * Setter for <code>observations.type</code>.
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -82,6 +100,12 @@ public class Observations implements Serializable {
         }
         else if (!this.observation.equals(other.observation))
             return false;
+        if (this.type == null) {
+            if (other.type != null)
+                return false;
+        }
+        else if (!this.type.equals(other.type))
+            return false;
         return true;
     }
 
@@ -91,6 +115,7 @@ public class Observations implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.observation == null) ? 0 : this.observation.hashCode());
+        result = prime * result + ((this.type == null) ? 0 : this.type.hashCode());
         return result;
     }
 
@@ -100,6 +125,7 @@ public class Observations implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(observation);
+        sb.append(", ").append(type);
 
         sb.append(")");
         return sb.toString();

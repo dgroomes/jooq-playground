@@ -36,3 +36,10 @@ Follow these instructions to setup the database, and build and run the program:
      ```text
      todo
      ```
+
+
+## Reference
+
+* [SQLite foreign key support](https://www.sqlite.org/foreignkeys.html)
+  * Interestingly, SQLite does not enable foreign key support by default.
+* [`sqlite-jdbc` config](https://github.com/xerial/sqlite-jdbc/blob/master/Usage.md)

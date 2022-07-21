@@ -8,15 +8,17 @@ import dgroomes.db.DefaultSchema;
 import dgroomes.db.Keys;
 import dgroomes.db.tables.records.ObservationsRecord;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function2;
+import org.jooq.Function3;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -58,6 +60,11 @@ public class Observations extends TableImpl<ObservationsRecord> {
      * The column <code>observations.observation</code>.
      */
     public final TableField<ObservationsRecord, String> OBSERVATION = createField(DSL.name("observation"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>observations.type</code>.
+     */
+    public final TableField<ObservationsRecord, Integer> TYPE = createField(DSL.name("type"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Observations(Name alias, Table<ObservationsRecord> aliased) {
         this(alias, aliased, null);
@@ -103,6 +110,23 @@ public class Observations extends TableImpl<ObservationsRecord> {
     }
 
     @Override
+    public List<ForeignKey<ObservationsRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.OBSERVATIONS__FK_OBSERVATIONS_PK_OBSERVATION_TYPES);
+    }
+
+    private transient ObservationTypes _observationTypes;
+
+    /**
+     * Get the implicit join path to the <code>observation_types</code> table.
+     */
+    public ObservationTypes observationTypes() {
+        if (_observationTypes == null)
+            _observationTypes = new ObservationTypes(this, Keys.OBSERVATIONS__FK_OBSERVATIONS_PK_OBSERVATION_TYPES);
+
+        return _observationTypes;
+    }
+
+    @Override
     public Observations as(String alias) {
         return new Observations(DSL.name(alias), this);
     }
@@ -142,18 +166,18 @@ public class Observations extends TableImpl<ObservationsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Integer, String, Integer> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super Integer, ? super String, ? super Integer, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -161,7 +185,7 @@ public class Observations extends TableImpl<ObservationsRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super Integer, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super Integer, ? super String, ? super Integer, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

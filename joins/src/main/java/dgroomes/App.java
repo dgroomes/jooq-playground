@@ -8,11 +8,13 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sqlite.SQLiteConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import static dgroomes.db.tables.Observations.OBSERVATIONS;
 
@@ -22,19 +24,29 @@ import static dgroomes.db.tables.Observations.OBSERVATIONS;
 public class App {
 
   private static final Logger log = LoggerFactory.getLogger(App.class);
+  public static final String JDBC_URL = "jdbc:sqlite:observations.db";
 
   public static void main(String[] args) {
     // You will likely want to turn off the jOOQ startup-time logging.
     System.setProperty("org.jooq.no-logo", "true");
     System.setProperty("org.jooq.no-tips", "true");
 
-    try (var connection = DriverManager.getConnection("jdbc:sqlite:observations.db"); var statement = connection.createStatement()) {
+    try (var connection = getConnection()) {
 
       queryViaDsl(connection);
       queryWithDao(connection);
     } catch (SQLException e) {
       log.error("Unexpected error while using the SQLite database", e);
     }
+  }
+
+  private static Connection getConnection() throws SQLException {
+    var config = new SQLiteConfig();
+    config.enforceForeignKeys(true);
+
+    Properties properties = config.toProperties();
+
+    return DriverManager.getConnection(JDBC_URL, properties);
   }
 
   /**

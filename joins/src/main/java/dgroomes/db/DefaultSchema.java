@@ -4,6 +4,7 @@
 package dgroomes.db;
 
 
+import dgroomes.db.tables.ObservationTypes;
 import dgroomes.db.tables.Observations;
 
 import java.util.Arrays;
@@ -28,6 +29,11 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
+     * The table <code>observation_types</code>.
+     */
+    public final ObservationTypes OBSERVATION_TYPES = ObservationTypes.OBSERVATION_TYPES;
+
+    /**
      * The table <code>observations</code>.
      */
     public final Observations OBSERVATIONS = Observations.OBSERVATIONS;
@@ -48,6 +54,7 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            ObservationTypes.OBSERVATION_TYPES,
             Observations.OBSERVATIONS
         );
     }

@@ -82,4 +82,19 @@ public class ObservationsDao extends DAOImpl<ObservationsRecord, dgroomes.db.tab
     public List<dgroomes.db.tables.pojos.Observations> fetchByObservation(String... values) {
         return fetch(Observations.OBSERVATIONS.OBSERVATION, values);
     }
+
+    /**
+     * Fetch records that have <code>type BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<dgroomes.db.tables.pojos.Observations> fetchRangeOfType(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(Observations.OBSERVATIONS.TYPE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>type IN (values)</code>
+     */
+    public List<dgroomes.db.tables.pojos.Observations> fetchByType(Integer... values) {
+        return fetch(Observations.OBSERVATIONS.TYPE, values);
+    }
 }
