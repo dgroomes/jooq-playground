@@ -54,19 +54,25 @@ public class App {
    */
   private static void queryViaDsl(Connection connection) {
     DSLContext create = DSL.using(connection, SQLDialect.MYSQL);
-    Result<Record> result = create.select().from(OBSERVATIONS).fetch();
+    Result<Record> result = create.select(OBSERVATIONS.asterisk(), OBSERVATIONS.observationTypes().asterisk())
+            .from(OBSERVATIONS)
+            .fetch();
 
     log.info("[Query using DSL] Found results...");
     for (Record record : result) {
       int id = record.getValue(OBSERVATIONS.ID);
       String observation = record.getValue(OBSERVATIONS.OBSERVATION);
-      log.info("{} {}", id, observation);
+      String type = record.getValue(OBSERVATIONS.observationTypes().DESCRIPTION);
+      log.info("id={} observation='{}' type='{}'", id, observation, type);
     }
     log.info("");
   }
 
   /**
    * Query the database using a jOOQ DAO (Data Access Object).
+   *
+   * It is not possible to use jOOQ's DAO for fetching an object graph. That's just not a feature of jOOQ. Instead, use
+   * the jOOQ DSL.
    */
   private static void queryWithDao(Connection connection) {
     Configuration configuration = new DefaultConfiguration().set(connection).set(SQLDialect.SQLITE);

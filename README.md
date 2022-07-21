@@ -33,8 +33,6 @@ See the README in [basic/](basic/).
 
 ### `joins/`
 
-NOT YET IMPLEMENTED
-
 An illustration of table joins in jOOQ.
 
 See the README in [joins/](joins/).
@@ -49,6 +47,6 @@ General clean-ups, TODOs and things I wish to implement for this project:
       to copy the jOOQ jars and the JDBC driver jar, but that's not trivial for a Gradle project. The idiomatic thing to
       do for a Gradle project is to create a Gradle plugin that depends on those artifacts (and thus, not code directly
       to jar files).
-* [ ] IN PROGRESS Make an intermediate project. I want multiple tables, I want to join across the tables, I want the query to be
+* [X] DONE Make an intermediate project. I want multiple tables, I want to join across the tables, I want the query to be
       dynamically created in a way that allows different joins to happen based on user input, I want about 1,000,000
       records and I want indexes on the tables.  

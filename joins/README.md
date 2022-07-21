@@ -1,7 +1,5 @@
 # joins
 
-NOT YET IMPLEMENTED
-
 An illustration of table joins in jOOQ.
 
 
@@ -43,3 +41,7 @@ Follow these instructions to setup the database, and build and run the program:
 * [SQLite foreign key support](https://www.sqlite.org/foreignkeys.html)
   * Interestingly, SQLite does not enable foreign key support by default.
 * [`sqlite-jdbc` config](https://github.com/xerial/sqlite-jdbc/blob/master/Usage.md)
+* [StackOverflow answer from jOOQ's creator](https://stackoverflow.com/a/61824859)
+  * > There are other approaches, but there's never going to be anything automatic about "object graph persistence" in
+      the way JPA would offer it, for example. The jOOQ philosophy is to always express every query explicitly - maybe
+      profit from some mapping sugar, but to never implicitly and automatically fetch entire object graphs.
